@@ -1,10 +1,18 @@
 using System;
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.ModuloCategoria;
 
 namespace ListaDeCompras.ConsoleApp;
 
 public class TelaPrincipal : ITela
 {
+    private TelaCategoria telaCategoria;
+
+    public TelaPrincipal(TelaCategoria telaCategoria)
+    {
+        this.telaCategoria = telaCategoria;
+    }
+
     public ITela ApresentarMenuPrincipal()
     {
         Console.Clear();
@@ -22,7 +30,7 @@ public class TelaPrincipal : ITela
 
         if (opcaoMenuPrincipal == "1")
         {
-            return null;
+            return telaCategoria;
         }
         else if (opcaoMenuPrincipal == "2")
         {

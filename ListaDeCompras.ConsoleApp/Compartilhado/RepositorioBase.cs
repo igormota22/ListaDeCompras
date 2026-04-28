@@ -1,21 +1,14 @@
-using System;
+using System.Collections;
 
 namespace ListaDeCompras.ConsoleApp.Compartilhado;
 
 public abstract class RepositorioBase
 {
-    protected EntidadeBase?[] registros = new EntidadeBase[100];
+    protected ArrayList registros = new ArrayList();
 
     public void Cadastrar(EntidadeBase novaEntidade)
     {
-        for (int i = 0; i < registros.Length; i++)
-        {
-            if (registros[i] == null)
-            {
-                registros[i] = novaEntidade;
-                break;
-            }
-        }
+       registros.Add(novaEntidade);
     }
 
     public bool Editar(string idSelecionado, EntidadeBase novaEntidade)
@@ -37,50 +30,33 @@ public abstract class RepositorioBase
 
     public EntidadeBase? SelecionarPorId(string idSelecionado)
     {
-        EntidadeBase? EntidadeSelecionada = null;
-
-        for (int i = 0; i < registros.Length; i++)
+        foreach (EntidadeBase registro in registros)
         {
-            EntidadeBase? c = registros[i];
-
-            if (c == null)
-                continue;
-
-            if (c.Id == idSelecionado)
+            if(registro.Id == idSelecionado)
             {
-                EntidadeSelecionada = c;
-                break;
+                return registro;
             }
         }
+        return null;
 
-        return EntidadeSelecionada;
     }
 
     public bool Excluir(string idSelecionado)
     {
-        for (int i = 0; i < registros.Length; i++)
+
+       EntidadeBase? registroSelecionado = SelecionarPorId(idSelecionado);
+
+       if(registroSelecionado.Id == idSelecionado)
         {
-            EntidadeBase? c = registros[i];
-
-            if (c == null)
-            {
-                continue;
-            }
-
-            if (c.Id == idSelecionado)
-            {
-                registros[i] = null;
-                return true;
-            }
+            registros.Remove(registroSelecionado);
+            return true;
         }
 
         return false;
     }
-
-    public EntidadeBase[]? SelecionarTodos()
+    public ArrayList SelecionarTodos()
     {
         return registros;
     }
 
-    public abstract bool VerificarValoresIguais(EntidadeBase entidade);
 }

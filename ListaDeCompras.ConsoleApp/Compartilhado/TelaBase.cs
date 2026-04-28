@@ -6,7 +6,7 @@ public abstract class TelaBase : ITela
 {
 
     private string nomeEntidade = string.Empty;
-    private RepositorioBase repositorio;
+    protected RepositorioBase repositorio;
 
     protected TelaBase(string nomeEntidade, RepositorioBase repositorio)
     {
@@ -44,15 +44,7 @@ public abstract class TelaBase : ITela
     {
         ObterCabecalho($"Cadastrar {nomeEntidade}");
         EntidadeBase novaEntidade = ObterDadosCadastrais();
-        string repetido = ExibirMensagemDeValorRepetido(novaEntidade);
 
-        if (repetido != null)
-        {
-            ExibirMensagem(repetido);
-
-            Cadastrar();
-            return;
-        }
 
         string[] erros = novaEntidade.Validar();
 
@@ -215,8 +207,6 @@ public abstract class TelaBase : ITela
     {
         return null;
     }
-
-    protected abstract string ExibirMensagemDeValorRepetido(EntidadeBase entidade);
 
     protected void ExibirMensagem(string mensagem)
     {
