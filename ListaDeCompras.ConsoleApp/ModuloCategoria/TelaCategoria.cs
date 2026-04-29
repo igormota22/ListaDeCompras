@@ -1,17 +1,17 @@
 
-using System.Collections;
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.ModuloProduto;
 
 namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
 
-public class TelaCategoria : TelaBase
+public class TelaCategoria : TelaBase<Categoria>
 {
-    public TelaCategoria(RepositorioCategoria repositorioCategoria) : base("Categoria", repositorioCategoria)
+    private RepositorioProduto repoProduto;
+
+    public TelaCategoria(RepositorioBase<Categoria> repositorio, RepositorioProduto repoProduto) : base("Categoria", repositorio)
     {
-
+        this.repoProduto = repoProduto;
     }
-
-    
 
     public override void Visualizar(bool deveApresentar)
     {
@@ -24,7 +24,7 @@ public class TelaCategoria : TelaBase
            "Id", "Nome", "Cor"
        );
 
-        ArrayList categorias = repositorio.SelecionarTodos();
+        List<Categoria> categorias = repositorio.SelecionarTodos();
 
 
         if (categorias.Count == 0)
@@ -51,7 +51,7 @@ public class TelaCategoria : TelaBase
     }
 
 
-    protected override EntidadeBase ObterDadosCadastrais()
+    protected override Categoria ObterDadosCadastrais()
     {
         System.Console.Write("Digite o nome da categoria: ");
         string nome = Console.ReadLine() ?? string.Empty;
@@ -82,9 +82,19 @@ public class TelaCategoria : TelaBase
         return new Categoria(nome, cor);
     }
 
-    public override string ExibirMensagemDeValorIgual()
+    protected override string ExibirMensagemDeValorIgual()
     {
         return "Ja existe uma categoria com esse nome";
     }
+
+    protected override string ValidarExclusao(Categoria entidade)
+    {
+        if (repoProduto.TemProdutosVinculados(entidade.Id))
+            return "Não é possível excluir. Categoria possui produtos!";
+
+        return null;
+    }
+
+
 
 }

@@ -3,13 +3,13 @@ using System.Collections;
 
 namespace ListaDeCompras.ConsoleApp.Compartilhado;
 
-public abstract class TelaBase : ITela
+public abstract class TelaBase<T> : ITela where T : EntidadeBase
 {
 
     private string nomeEntidade = string.Empty;
-    protected RepositorioBase repositorio;
+    protected RepositorioBase<T> repositorio;
 
-    protected TelaBase(string nomeEntidade, RepositorioBase repositorio)
+    protected TelaBase(string nomeEntidade, RepositorioBase<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
@@ -44,7 +44,7 @@ public abstract class TelaBase : ITela
     public void Cadastrar()
     {
         ObterCabecalho($"Cadastrar {nomeEntidade}");
-        EntidadeBase novaEntidade = ObterDadosCadastrais();
+        T novaEntidade = ObterDadosCadastrais();
 
 
         string[] erros = novaEntidade.Validar();
@@ -77,7 +77,8 @@ public abstract class TelaBase : ITela
 
         if (temigual == true)
         {
-           Console.WriteLine(ExibirMensagemDeValorIgual()); 
+            Console.WriteLine(ExibirMensagemDeValorIgual());
+            System.Console.WriteLine("Pressione ENTER para continuar");
             Console.ReadLine();
             return;
 
@@ -111,7 +112,7 @@ public abstract class TelaBase : ITela
             }
         } while (true);
 
-        EntidadeBase novaEntidade = ObterDadosCadastrais();
+        T novaEntidade = ObterDadosCadastrais();
 
         string[] erros = novaEntidade.Validar();
 
@@ -175,7 +176,7 @@ public abstract class TelaBase : ITela
             }
         } while (true);
 
-        EntidadeBase entidade = repositorio.SelecionarPorId(idSelecionado);
+        T entidade = repositorio.SelecionarPorId(idSelecionado);
 
         string erro = ValidarExclusao(entidade);
         if (erro != null)
@@ -212,9 +213,9 @@ public abstract class TelaBase : ITela
         Console.WriteLine("---------------------------------");
     }
 
-    protected abstract EntidadeBase ObterDadosCadastrais();
+    protected abstract T ObterDadosCadastrais();
 
-    protected virtual string ValidarExclusao(EntidadeBase entidade)
+    protected virtual string ValidarExclusao(T entidade)
     {
         return null;
     }
@@ -228,9 +229,9 @@ public abstract class TelaBase : ITela
         Console.ReadLine();
     }
 
-   
 
-    public virtual string ExibirMensagemDeValorIgual()
+
+    protected virtual string ExibirMensagemDeValorIgual()
     {
         return null;
     }

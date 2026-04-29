@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+
 using ListaDeCompras.ConsoleApp.Compartilhado;
 
 namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
@@ -45,8 +44,5 @@ public class Categoria : EntidadeBase
         return erros.Split(";", StringSplitOptions.RemoveEmptyEntries);
     }
 
-    public static explicit operator Categoria(ArrayList v)
-    {
-        throw new NotImplementedException();
-    }
+
 }

@@ -1,6 +1,7 @@
-using System;
+
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
+using ListaDeCompras.ConsoleApp.ModuloProduto;
 
 namespace ListaDeCompras.ConsoleApp;
 
@@ -8,9 +9,12 @@ public class TelaPrincipal : ITela
 {
     private TelaCategoria telaCategoria;
 
-    public TelaPrincipal(TelaCategoria telaCategoria)
+    private TelaProduto telaProduto;
+
+    public TelaPrincipal(TelaCategoria telaCategoria, TelaProduto telaProduto)
     {
         this.telaCategoria = telaCategoria;
+        this.telaProduto = telaProduto;
     }
 
     public ITela ApresentarMenuPrincipal()
@@ -34,7 +38,7 @@ public class TelaPrincipal : ITela
         }
         else if (opcaoMenuPrincipal == "2")
         {
-            return null;
+            return telaProduto;
         }
         else if (opcaoMenuPrincipal == "3")
         {

@@ -1,19 +1,17 @@
-using System.Collections;
 
 namespace ListaDeCompras.ConsoleApp.Compartilhado;
 
-public abstract class RepositorioBase
+public abstract class RepositorioBase<T> where T : EntidadeBase
 {
-    protected ArrayList registros = new ArrayList();
-
-    public void Cadastrar(EntidadeBase novaEntidade)
+    protected List<T> registros = new List<T>();
+    public void Cadastrar(T novaEntidade)
     {
-       registros.Add(novaEntidade);
+        registros.Add(novaEntidade);
     }
 
-    public bool Editar(string idSelecionado, EntidadeBase novaEntidade)
+    public bool Editar(string idSelecionado, T novaEntidade)
     {
-        EntidadeBase? EntidadeSelecionada = SelecionarPorId(idSelecionado);
+        T? EntidadeSelecionada = SelecionarPorId(idSelecionado);
 
         if (EntidadeSelecionada == null)
         {
@@ -28,11 +26,11 @@ public abstract class RepositorioBase
     }
 
 
-    public EntidadeBase? SelecionarPorId(string idSelecionado)
+    public T? SelecionarPorId(string idSelecionado)
     {
-        foreach (EntidadeBase registro in registros)
+        foreach (T registro in registros)
         {
-            if(registro.Id == idSelecionado)
+            if (registro.Id == idSelecionado)
             {
                 return registro;
             }
@@ -44,21 +42,22 @@ public abstract class RepositorioBase
     public bool Excluir(string idSelecionado)
     {
 
-       EntidadeBase? registroSelecionado = SelecionarPorId(idSelecionado);
+        T? registroSelecionado = SelecionarPorId(idSelecionado);
 
-       if(registroSelecionado.Id == idSelecionado)
+        if (registroSelecionado == null)
         {
-            registros.Remove(registroSelecionado);
-            return true;
+            return false;
         }
+        registros.Remove(registroSelecionado);
 
-        return false;
+        return true;
     }
-    public ArrayList SelecionarTodos()
+    public List<T> SelecionarTodos()
     {
         return registros;
     }
 
-     public abstract bool VerificarValoresIguais(EntidadeBase entidade);
+    public abstract bool VerificarValoresIguais(T entidade);
 
+   
 }
