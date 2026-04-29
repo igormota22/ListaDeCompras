@@ -1,6 +1,7 @@
 
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
+using ListaDeCompras.ConsoleApp.ModuloListaCompra;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
 
 namespace ListaDeCompras.ConsoleApp;
@@ -11,10 +12,13 @@ public class TelaPrincipal : ITela
 
     private TelaProduto telaProduto;
 
-    public TelaPrincipal(TelaCategoria telaCategoria, TelaProduto telaProduto)
+    private TelaListaCompra telaListaCompra;
+
+    public TelaPrincipal(TelaCategoria telaCategoria, TelaProduto telaProduto, TelaListaCompra telaListaCompra)
     {
         this.telaCategoria = telaCategoria;
         this.telaProduto = telaProduto;
+        this.telaListaCompra = telaListaCompra;
     }
 
     public ITela ApresentarMenuPrincipal()
@@ -25,8 +29,8 @@ public class TelaPrincipal : ITela
         Console.WriteLine("---------------------------------");
         Console.WriteLine("1 - Gerenciar categorias");
         Console.WriteLine("2 - Gerenciar produtos ");
-        Console.WriteLine("3 - Gerenciar item de lista de compras");
-        Console.WriteLine("4 - Gerenciar lista de compras ");
+        Console.WriteLine("3 - Gerenciar listas de compras");
+        Console.WriteLine("4 - Gerenciar items de lista de compras ");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -42,7 +46,7 @@ public class TelaPrincipal : ITela
         }
         else if (opcaoMenuPrincipal == "3")
         {
-            return null;
+            return telaListaCompra;
         }
         else if (opcaoMenuPrincipal == "4")
         {
