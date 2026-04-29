@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 namespace ListaDeCompras.ConsoleApp.Compartilhado;
 
@@ -68,6 +69,16 @@ public abstract class TelaBase : ITela
             Console.ReadLine();
 
             Cadastrar();
+            return;
+
+        }
+
+        bool temigual = repositorio.VerificarValoresIguais(novaEntidade);
+
+        if (temigual == true)
+        {
+           Console.WriteLine(ExibirMensagemDeValorIgual()); 
+            Console.ReadLine();
             return;
 
         }
@@ -215,5 +226,12 @@ public abstract class TelaBase : ITela
         System.Console.WriteLine("--------------------------------");
         System.Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
+    }
+
+   
+
+    public virtual string ExibirMensagemDeValorIgual()
+    {
+        return null;
     }
 }

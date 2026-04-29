@@ -10,6 +10,9 @@ public class TelaCategoria : TelaBase
     {
 
     }
+
+    
+
     public override void Visualizar(bool deveApresentar)
     {
         if (deveApresentar)
@@ -39,7 +42,7 @@ public class TelaCategoria : TelaBase
         if (deveApresentar)
         {
 
-            System.Console.WriteLine("-------------------------------------1");
+            System.Console.WriteLine("--------------------------------------");
             System.Console.WriteLine("Pressione ENTER para continuar");
             Console.ReadLine();
         }
@@ -78,4 +81,10 @@ public class TelaCategoria : TelaBase
 
         return new Categoria(nome, cor);
     }
+
+    public override string ExibirMensagemDeValorIgual()
+    {
+        return "Ja existe uma categoria com esse nome";
+    }
+
 }

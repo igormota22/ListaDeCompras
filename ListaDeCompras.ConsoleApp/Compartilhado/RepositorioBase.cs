@@ -59,4 +59,6 @@ public abstract class RepositorioBase
         return registros;
     }
 
+     public abstract bool VerificarValoresIguais(EntidadeBase entidade);
+
 }
