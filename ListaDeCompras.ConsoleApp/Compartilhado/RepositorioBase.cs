@@ -57,7 +57,10 @@ public abstract class RepositorioBase<T> where T : EntidadeBase
         return registros;
     }
 
-    public abstract bool VerificarValoresIguais(T entidade);
+    public virtual bool VerificarValoresIguais(T entidade)
+    {
+        return false;
+    }
 
-   
+
 }
