@@ -1,5 +1,6 @@
 using System;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
+using ListaDeCompras.ConsoleApp.ModuloItemLista;
 using ListaDeCompras.ConsoleApp.ModuloListaCompra;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
 
@@ -13,7 +14,6 @@ public static class FabricaTela
         RepositorioProduto repositorioProduto = new RepositorioProduto();
         RepositorioListaCompra repositorioListaCompra = new RepositorioListaCompra();
 
-
         Categoria categoria = new Categoria("Higiene", "Vermelho");
         repositorioCategoria.Cadastrar(categoria);
 
@@ -26,8 +26,9 @@ public static class FabricaTela
         TelaCategoria telaCategoria = new TelaCategoria(repositorioCategoria, repositorioProduto);
         TelaProduto telaProduto = new TelaProduto(repositorioProduto, repositorioCategoria);
         TelaListaCompra telaListaCompra = new TelaListaCompra(repositorioListaCompra);
+        TelaItemLista<ItemLista> telaItemLista = new TelaItemLista<ItemLista>(repositorioProduto, repositorioListaCompra);
 
-        return new TelaPrincipal(telaCategoria, telaProduto, telaListaCompra);
+        return new TelaPrincipal(telaCategoria, telaProduto, telaListaCompra, telaItemLista);
 
     }
 }

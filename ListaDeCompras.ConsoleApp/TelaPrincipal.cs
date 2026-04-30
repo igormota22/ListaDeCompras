@@ -1,6 +1,7 @@
 
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
+using ListaDeCompras.ConsoleApp.ModuloItemLista;
 using ListaDeCompras.ConsoleApp.ModuloListaCompra;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
 
@@ -14,11 +15,14 @@ public class TelaPrincipal : ITela
 
     private TelaListaCompra telaListaCompra;
 
-    public TelaPrincipal(TelaCategoria telaCategoria, TelaProduto telaProduto, TelaListaCompra telaListaCompra)
+    private TelaItemLista<ItemLista> telaItemLista;
+
+    public TelaPrincipal(TelaCategoria telaCategoria, TelaProduto telaProduto, TelaListaCompra telaListaCompra, TelaItemLista<ItemLista> telaItemLista)
     {
         this.telaCategoria = telaCategoria;
         this.telaProduto = telaProduto;
         this.telaListaCompra = telaListaCompra;
+        this.telaItemLista = telaItemLista;
     }
 
     public ITela ApresentarMenuPrincipal()
@@ -50,7 +54,7 @@ public class TelaPrincipal : ITela
         }
         else if (opcaoMenuPrincipal == "4")
         {
-            return null;
+            return telaItemLista;
         }
         else
         {
