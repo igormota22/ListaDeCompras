@@ -55,6 +55,9 @@ public class TelaItemLista<T> : ITela where T : ItemLista
             return;
         }
 
+        Console.WriteLine();
+
+
         Console.WriteLine("{0, -7} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
      "Id", "Nome", "Unidade", "Preço", "Categoria");
         Console.WriteLine("--------------------------------------------------------------------------");
@@ -117,6 +120,8 @@ public class TelaItemLista<T> : ITela where T : ItemLista
             ExibirMensagem("Nenhum produto cadastrado!");
             return;
         }
+
+        Console.WriteLine();
 
         Console.WriteLine("{0, -7} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
      "Id", "Nome", "Unidade", "Preço", "Categoria");
@@ -183,15 +188,16 @@ public class TelaItemLista<T> : ITela where T : ItemLista
             return;
         }
 
-        Console.WriteLine("{0, -8} | {1, -25} | {2, -20} | {3, -5} | {4, -12} | {5, -12}",
+        Console.WriteLine();
+
+        Console.WriteLine("{0, -8} | {1, -25} | {2, -20} | {3, -5} | {4, -12}",
             "Id", "Produto", "Categoria", "Qtd", "Preço Un", "Subtotal");
         Console.WriteLine("-------------------------------------------------------------------------------------------");
 
-        decimal total = 0;
         foreach (var item in listaSelecionada.Itens)
         {
-            decimal subtotal = item.CalcularValorDaLista();
-            Console.WriteLine("{0, -8} | {1, -25} | {2, -20} | {3, -5} | {4, -12:C2} | {5, -12:C2}",
+            decimal subtotal = item.CalcularSubtotal();
+            Console.WriteLine("{0, -8} | {1, -25} | {2, -20} | {3, -5} | {4, -12:C2}",
                 item.Id,
                 item.Produto.Nome,
                 item.Produto.Categoria?.Nome,
@@ -199,11 +205,8 @@ public class TelaItemLista<T> : ITela where T : ItemLista
                 item.Produto.Preco,
                 subtotal);
 
-            total += subtotal;
         }
 
-        Console.WriteLine("-------------------------------------------------------------------------------------------");
-        Console.WriteLine($"{"TOTAL:",76} {total,12:C2}");
         Console.WriteLine("Pressione ENTER para continuar");
         Console.ReadLine();
     }
@@ -218,13 +221,13 @@ public class TelaItemLista<T> : ITela where T : ItemLista
             return null;
         }
 
-        Console.WriteLine("------ Selecione a Lista ------");
-        Console.WriteLine("{0, -8} | {1, -25} | {2, -12}", "Id", "Nome", "Abertura");
-        Console.WriteLine("---------------------------------------------");
+        Console.WriteLine("--------------------------------------------------------------");
+        Console.WriteLine("{0, -8} | {1, -25} | {2, -12} | {3, -12}", "Id", "Nome", "Abertura", "Status");
+        Console.WriteLine("--------------------------------------------------------------");
 
         foreach (var l in listas)
         {
-            Console.WriteLine("{0, -8} | {1, -25} | {2, -12}", l.Id, l.Nome, l.DataDeCriacao.ToShortDateString());
+            Console.WriteLine("{0, -8} | {1, -25} | {2, -12} | {3, 12}", l.Id, l.Nome, l.DataDeCriacao.ToShortDateString(), l.Status);
         }
         Console.WriteLine("---------------------------------------------");
 

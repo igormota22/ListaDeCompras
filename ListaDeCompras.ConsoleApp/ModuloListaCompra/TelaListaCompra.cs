@@ -5,8 +5,10 @@ namespace ListaDeCompras.ConsoleApp.ModuloListaCompra;
 
 public class TelaListaCompra : TelaBase<ListaCompra>
 {
+
     public TelaListaCompra(RepositorioBase<ListaCompra> repositorio) : base("Lista de Compra", repositorio)
     {
+
     }
 
     public override void Visualizar(bool deveApresentar)
@@ -15,10 +17,8 @@ public class TelaListaCompra : TelaBase<ListaCompra>
 
             ObterCabecalho("visualizar listas ");
 
-        Console.WriteLine(
-           "{0, -7} | {1, -20} | {2, -10} | {3, -10}",
-           "Id", "Nome", "Abertura", "Status"
-       );
+        Console.WriteLine("{0,-7} | {1,-25} | {2,-12} | {3,-12} | {4,10} | {5, 10}",
+       "ID", "Nome", "Data", "Status", "Qtd Itens", "Total");
 
         List<ListaCompra> listas = repositorio.SelecionarTodos();
 
@@ -31,9 +31,14 @@ public class TelaListaCompra : TelaBase<ListaCompra>
 
         foreach (ListaCompra l in listas)
         {
-            Console.WriteLine("{0,-7} | {1,-20} | {2,-10} | {3, -10}", l.Id, l.Nome, l.DataDeCriacao.ToShortDateString(), l.Status);
+            Console.WriteLine("{0,-7} | {1,-25} | {2,-12} | {3,-12} | {4,10} | {5, 10}",
+           l.Id,
+           l.Nome,
+           l.DataDeCriacao.ToShortDateString(),
+           l.Status,
+           l.ObterTotalItens(),
+           l.CalcularValorTotal());
         }
-
 
         if (deveApresentar)
         {
@@ -51,5 +56,14 @@ public class TelaListaCompra : TelaBase<ListaCompra>
         string nome = Console.ReadLine() ?? string.Empty;
 
         return new ListaCompra(nome);
+    }
+
+    protected override string ValidarExclusao(ListaCompra entidade)
+    {
+        if (entidade.Itens.Count > 0)
+        {
+            return "Não é possível excluir! Essa lista possui itens.";
+        }
+        return null;
     }
 }

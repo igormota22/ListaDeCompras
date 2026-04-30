@@ -1,5 +1,6 @@
 using System;
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.ModuloItemLista;
 
 namespace ListaDeCompras.ConsoleApp.ModuloListaCompra;
 
@@ -7,6 +8,7 @@ public class RepositorioListaCompra : RepositorioBase<ListaCompra>
 {
     public override bool VerificarValoresIguais(ListaCompra entidade)
     {
-        throw new NotImplementedException();
+        return false;
     }
+
 }

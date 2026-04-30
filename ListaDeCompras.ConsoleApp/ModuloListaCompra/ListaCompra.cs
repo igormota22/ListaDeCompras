@@ -15,6 +15,7 @@ public class ListaCompra : EntidadeBase
     public ListaCompra(string nome)
     {
         Nome = nome;
+
     }
 
     public void AdicionarItem(Produto produto, int quantidade)
@@ -24,11 +25,13 @@ public class ListaCompra : EntidadeBase
             if (Itens[i].Produto.Id == produto.Id)
             {
                 Itens[i].Quantidade += quantidade;
+
                 return;
             }
         }
 
         ItemLista novoItem = new ItemLista(produto, quantidade);
+
         Itens.Add(novoItem);
     }
 
@@ -42,6 +45,26 @@ public class ListaCompra : EntidadeBase
                 return;
             }
         }
+    }
+
+    public int ObterTotalItens()
+    {
+        int total = 0;
+        for (int i = 0; i < Itens.Count; i++)
+        {
+            total += Itens[i].Quantidade;
+        }
+        return total;
+    }
+
+    public decimal CalcularValorTotal()
+    {
+        decimal total = 0;
+        for (int i = 0; i < Itens.Count; i++)
+        {
+            total += Itens[i].CalcularSubtotal();
+        }
+        return total;
     }
 
     public override void AtualizarDados(EntidadeBase entidadeAtualizada)
