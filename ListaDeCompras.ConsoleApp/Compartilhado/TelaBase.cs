@@ -15,7 +15,7 @@ public abstract class TelaBase<T> : ITela where T : EntidadeBase
         this.repositorio = repositorio;
     }
 
-    public string? ObterOpcaoMenu()
+    public virtual string? ObterOpcaoMenu()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
@@ -33,7 +33,7 @@ public abstract class TelaBase<T> : ITela where T : EntidadeBase
         return opcaoMenu;
     }
 
-    public void ExecutarOpcao(string opcao)
+    public virtual void ExecutarOpcao(string opcao)
     {
         if (opcao == "1") Cadastrar();
         else if (opcao == "2") Editar();

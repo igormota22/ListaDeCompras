@@ -27,10 +27,9 @@ public static class FabricaTela
 
         TelaCategoria telaCategoria = new TelaCategoria(repositorioCategoria, repositorioProduto);
         TelaProduto telaProduto = new TelaProduto(repositorioProduto, repositorioCategoria);
-        TelaListaCompra telaListaCompra = new TelaListaCompra(repositorioListaCompra);
-        TelaItemLista<ItemLista> telaItemLista = new TelaItemLista<ItemLista>(repositorioProduto, repositorioListaCompra);
+        TelaListaCompra telaListaCompra = new TelaListaCompra(repositorioListaCompra, repositorioProduto);
 
-        return new TelaPrincipal(telaCategoria, telaProduto, telaListaCompra, telaItemLista);
+        return new TelaPrincipal(telaCategoria, telaProduto, telaListaCompra);
 
     }
 }
