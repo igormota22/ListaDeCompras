@@ -1,4 +1,4 @@
-using System;
+
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloItemLista;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
@@ -22,10 +22,8 @@ public class ListaCompra : EntidadeBase
     {
         for (int i = 0; i < Itens.Count; i++)
         {
-            if (Itens[i].Produto.Id == produto.Id)
+            if (VerificarItemRepetido(produto))
             {
-                Itens[i].Quantidade += quantidade;
-
                 return;
             }
         }
@@ -33,6 +31,13 @@ public class ListaCompra : EntidadeBase
         ItemLista novoItem = new ItemLista(produto, quantidade);
 
         Itens.Add(novoItem);
+    }
+
+    public bool VerificarItemRepetido(Produto produto)
+    {
+       if( Itens.Any(i => i.Produto.Id == produto.Id))return true;
+
+       return false;
     }
 
     public void RemoverProduto(string idProduto)

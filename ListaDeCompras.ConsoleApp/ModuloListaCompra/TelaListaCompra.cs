@@ -37,7 +37,7 @@ public class TelaListaCompra : TelaBase<ListaCompra>
            l.DataDeCriacao.ToShortDateString(),
            l.Status,
            l.ObterTotalItens(),
-           l.CalcularValorTotal());
+           l.CalcularValorTotal().ToString("C"));
         }
 
         if (deveApresentar)

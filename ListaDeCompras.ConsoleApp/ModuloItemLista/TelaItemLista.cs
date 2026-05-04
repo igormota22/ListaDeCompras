@@ -95,9 +95,17 @@ public class TelaItemLista<T> : ITela where T : ItemLista
         }
 
         Console.Write("Digite a quantidade: ");
-        if (!int.TryParse(Console.ReadLine(), out int qtd)) return;
+        if (!int.TryParse(Console.ReadLine(), out int quantidade)) return;
 
-        listaSelecionada.AdicionarItem(produtoSelecionado, qtd);
+        bool itemJaExiste = listaSelecionada.VerificarItemRepetido(produtoSelecionado);
+
+        if (itemJaExiste == true)
+        {
+            ExibirMensagem("Item ja está na lista");
+            return;
+        }
+
+        listaSelecionada.AdicionarItem(produtoSelecionado, quantidade);
 
         ExibirMensagem("Item adicionado!");
 
@@ -257,5 +265,7 @@ public class TelaItemLista<T> : ITela where T : ItemLista
         System.Console.WriteLine("Digite ENTER para continuar");
         Console.ReadLine();
     }
+
+
 
 }
