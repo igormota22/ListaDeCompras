@@ -14,17 +14,6 @@ public static class FabricaTela
         RepositorioProduto repositorioProduto = new RepositorioProduto();
         RepositorioListaCompra repositorioListaCompra = new RepositorioListaCompra();
 
-        Categoria categoria = new Categoria("Higiene", "Vermelho");
-        repositorioCategoria.Cadastrar(categoria);
-
-        Produto produto = new Produto("Sabao", "Kg", 30, categoria);
-        repositorioProduto.Cadastrar(produto);
-
-        ListaCompra listaCompra = new ListaCompra("Rancho");
-        repositorioListaCompra.Cadastrar(listaCompra);
-
-        listaCompra.AdicionarItem(produto, 3);
-
         TelaCategoria telaCategoria = new TelaCategoria(repositorioCategoria, repositorioProduto);
         TelaProduto telaProduto = new TelaProduto(repositorioProduto, repositorioCategoria);
         TelaListaCompra telaListaCompra = new TelaListaCompra(repositorioListaCompra, repositorioProduto);
