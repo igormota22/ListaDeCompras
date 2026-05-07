@@ -1,5 +1,6 @@
 
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.Compartilhado.Arquivo;
 using ListaDeCompras.ConsoleApp.ModuloItemLista;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
 
@@ -7,14 +8,20 @@ namespace ListaDeCompras.ConsoleApp.ModuloListaCompra;
 
 public class ListaCompra : EntidadeBase
 {
-    public string Nome { get; private set; }
+    public string Nome { get; set; }
     public DateTime DataDeCriacao { get; } = DateTime.Now;
     public StatusLista Status { get; set; }
     public List<ItemLista> Itens { get; set; } = new List<ItemLista>();
 
+
     public ListaCompra(string nome)
     {
         Nome = nome;
+
+    }
+
+    public ListaCompra()
+    {
 
     }
 
@@ -26,6 +33,7 @@ public class ListaCompra : EntidadeBase
             {
                 return;
             }
+
         }
 
         ItemLista novoItem = new ItemLista(produto, quantidade);
@@ -35,9 +43,9 @@ public class ListaCompra : EntidadeBase
 
     public bool VerificarItemRepetido(Produto produto)
     {
-       if( Itens.Any(i => i.Produto.Id == produto.Id))return true;
+        if (Itens.Any(i => i.Produto.Id == produto.Id)) return true;
 
-       return false;
+        return false;
     }
 
     public void RemoverProduto(string idProduto)

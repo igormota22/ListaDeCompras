@@ -7,7 +7,7 @@ namespace ListaDeCompras.ConsoleApp.ModuloProduto;
 public class Produto : EntidadeBase
 {
 
-    public string Nome { get; private set; }
+    public string Nome { get; set; }
     public Categoria Categoria { get; set; }
     public string Unidade { get; set; }
     public decimal Preco { get; set; }
@@ -18,6 +18,11 @@ public class Produto : EntidadeBase
         Categoria = categoria;
         Unidade = unidade;
         Preco = preco;
+    }
+
+    public Produto()
+    {
+
     }
 
     public override void AtualizarDados(EntidadeBase entidadeAtualizada)

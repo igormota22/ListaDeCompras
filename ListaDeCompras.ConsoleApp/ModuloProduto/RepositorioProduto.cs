@@ -3,7 +3,7 @@ using ListaDeCompras.ConsoleApp.Compartilhado;
 
 namespace ListaDeCompras.ConsoleApp.ModuloProduto;
 
-public class RepositorioProduto : RepositorioBase<Produto>
+public class RepositorioProduto : RepositorioBase<Produto>, IRepositorio<Produto>
 {
     public override bool VerificarValoresIguais(Produto entidade)
     {
@@ -31,5 +31,10 @@ public class RepositorioProduto : RepositorioBase<Produto>
         }
 
         return false;
+    }
+
+    public bool VerificarValoresIguais<T>(T novaEntidade) where T : EntidadeBase
+    {
+        throw new NotImplementedException();
     }
 }

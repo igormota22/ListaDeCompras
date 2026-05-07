@@ -1,4 +1,5 @@
 using System;
+using ListaDeCompras.ConsoleApp.Compartilhado.Arquivo;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
 using ListaDeCompras.ConsoleApp.ModuloItemLista;
 using ListaDeCompras.ConsoleApp.ModuloListaCompra;
@@ -10,9 +11,12 @@ public static class FabricaTela
 {
     public static TelaPrincipal CriarTelaPrincipal()
     {
-        RepositorioCategoria repositorioCategoria = new RepositorioCategoria();
-        RepositorioProduto repositorioProduto = new RepositorioProduto();
-        RepositorioListaCompra repositorioListaCompra = new RepositorioListaCompra();
+        ContextoJson contexto = new ContextoJson();
+        contexto.Carregar();
+
+        IRepositorio<Categoria> repositorioCategoria = new RepositorioCategoriaEmArquivo(contexto);
+        IRepositorio<Produto> repositorioProduto = new RepositorioProdutoEmArquivo(contexto);
+        IRepositorio<ListaCompra> repositorioListaCompra = new RepositorioListaCompraEmArquivo(contexto);
 
         TelaCategoria telaCategoria = new TelaCategoria(repositorioCategoria, repositorioProduto);
         TelaProduto telaProduto = new TelaProduto(repositorioProduto, repositorioCategoria);

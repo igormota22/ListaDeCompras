@@ -6,8 +6,13 @@ using ListaDeCompras.ConsoleApp.ModuloProduto;
 
 namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
 
-public class RepositorioCategoria : RepositorioBase<Categoria>
+public class RepositorioCategoria : RepositorioBase<Categoria>, IRepositorio<Categoria>
 {
+    public bool TemProdutosVinculados(string id)
+    {
+        return false;
+    }
+
     public override bool VerificarValoresIguais(Categoria entidade)
     {
         Categoria novaCategoria = (Categoria)entidade;
@@ -20,6 +25,7 @@ public class RepositorioCategoria : RepositorioBase<Categoria>
         }
         return false;
     }
+
 }
 
 

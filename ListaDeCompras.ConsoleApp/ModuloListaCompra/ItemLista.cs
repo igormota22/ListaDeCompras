@@ -22,6 +22,11 @@ public class ItemLista
         Quantidade = quantidade;
     }
 
+    public ItemLista()
+    {
+
+    }
+
     public decimal CalcularSubtotal()
     {
         return Produto.Preco * Quantidade;

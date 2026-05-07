@@ -8,8 +8,8 @@ namespace ListaDeCompras.ConsoleApp.ModuloListaCompra;
 
 public class TelaListaCompra : TelaBase<ListaCompra>
 {
-    private RepositorioProduto repositorioProduto;
-    public TelaListaCompra(RepositorioBase<ListaCompra> repositorio, RepositorioProduto repositorioProduto) : base("Lista de Compra", repositorio)
+    private IRepositorio<Produto> repositorioProduto;
+    public TelaListaCompra(IRepositorio<ListaCompra> repositorio, IRepositorio<Produto> repositorioProduto) : base("Lista de Compra", repositorio)
     {
         this.repositorioProduto = repositorioProduto;
     }
@@ -154,6 +154,7 @@ public class TelaListaCompra : TelaBase<ListaCompra>
         }
 
         listaSelecionada.AdicionarItem(produtoSelecionado, quantidade);
+
 
         ExibirMensagem("Item adicionado!");
 

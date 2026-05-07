@@ -7,9 +7,9 @@ public abstract class TelaBase<T> : ITela where T : EntidadeBase
 {
 
     private string nomeEntidade = string.Empty;
-    protected RepositorioBase<T> repositorio;
+    protected IRepositorio<T> repositorio;
 
-    protected TelaBase(string nomeEntidade, RepositorioBase<T> repositorio)
+    protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
